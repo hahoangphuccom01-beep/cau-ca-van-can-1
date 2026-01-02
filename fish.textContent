@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Câu Cá Vạn Cân</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0288d1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+    margin:0;
+    background:#0288d1;
+    font-family:Arial,sans-serif;
+    color:white;
+}
+#app{
+    width:100vw;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px;
+}
+h1{margin:10px 0}
+#score{font-size:20px}
+#fish{font-size:80px;margin-top:40px}
+button{
+    width:90%;
+    max-width:300px;
+    font-size:22px;
+    padding:15px;
+    border:none;
+    border-radius:15px;
+    background:#ffeb3b;
+    color:#000;
+    font-weight:bold;
+    margin-bottom:30px;
+}
+button:active{transform:scale(0.95)}
+</style>
+</head>
+
+<body>
+<div id="app">
+    <div>
+        <h1>🎣 CÂU CÁ VẠN CÂN</h1>
+        <div id="score">Điểm: 0</div>
+    </div>
+
+    <div id="fish">🌊</div>
+
+    <button onclick="catchFish()">CÂU CÁ</button>
+</div>
+
+<script>
+let score = 0;
+
+function catchFish(){
+    const r = Math.random();
+    const fish = document.getElementById("fish");
+
+    if(r < 0.6){
+        fish.textContent = "🐟";
+        score += 10;
+        toast("Cá nhỏ +10");
+    }else if(r < 0.9){
+        fish.textContent = "🐠";
+        score += 30;
+        toast("Cá lớn +30");
+    }else{
+        fish.textContent = "🐋";
+        score += 100;
+        toast("🎉 CÁ VẠN CÂN +100!");
+    }
+    document.getElementById("score").textContent = "Điểm: " + score;
+}
+
+function toast(text){
+    const t=document.createElement("div");
+    t.textContent=text;
+    t.style.position="fixed";
+    t.style.bottom="30px";
+    t.style.background="#000";
+    t.style.padding="10px 20px";
+    t.style.borderRadius="20px";
+    document.body.appendChild(t);
+    setTimeout(()=>t.remove(),1200);
+}
+</script>
+</body>
+</html>
